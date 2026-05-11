@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Smart Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Smart Study Planner</h1>
+
+    <h2>Add Study Task</h2>
+
+    <form action="/addTask" method="POST">
+
+        <input type="text" name="subject" placeholder="Subject" required>
+
+        <input type="text" name="task" placeholder="Task Name" required>
+
+        <input type="date" name="deadline" required>
+
+        <select name="priority">
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+        </select>
+
+        <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Calendar</h2>
+
+    <input type="date">
+
+    <h2>Weekly Timetable</h2>
+
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Tasks</th>
+        </tr>
+
+        <tr>
+            <td>Monday</td>
+            <td>High Priority Tasks</td>
+        </tr>
+
+        <tr>
+            <td>Tuesday</td>
+            <td>Medium Priority Tasks</td>
+        </tr>
+
+        <tr>
+            <td>Wednesday</td>
+            <td>Low Priority Tasks</td>
+        </tr>
+    </table>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
