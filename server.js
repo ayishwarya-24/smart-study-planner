@@ -17,8 +17,17 @@ app.use(session({
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "YOUR_PASSWORD",
+    password: "Starose24",
     database: "studyplanner"
+});
+
+db.connect((err) => {
+    if (err) {
+        console.error("Database connection failed:", err);
+        return;
+    }
+
+    console.log("Connected to MySQL!");
 });
 
 // REGISTER
@@ -64,7 +73,7 @@ app.post("/addTask", (req, res) => {
     const userId = req.session.userId;
 
     db.query(
-        `INSERT INTO tasks (user_id, subject, task, deadline, priority)
+        `INSERT INTO tasks (user_id, subject, task_name, deadline, priority)
          VALUES (?, ?, ?, ?, ?)`,
         [userId, subject, task, deadline, priority],
         (err) => {
