@@ -85,6 +85,55 @@ app.post("/addTask", (req, res) => {
 
 });
 
+//GET TASKS
+app.get("/tasks", (req, res) => {
+
+    const userId = req.session.userId;
+
+    db.query(
+        "SELECT * FROM tasks WHERE user_id = ?",
+        [userId],
+        (err, results) => {
+            if (err) throw err;
+
+            res.json(results);
+        }
+    );
+});
+
+
+//COMPLETE TASK
+app.post("/completeTask/:id", (req, res) => {
+
+    db.query(
+        "UPDATE tasks SET completed = TRUE WHERE id = ?",
+        [req.params.id],
+        (err) => {
+            if (err) throw err;
+
+            res.sendStatus(200);
+        }
+    );
+});
+
+//DELETE TASK
+app.post("/deleteTask/:id", (req, res) => {
+
+    db.query(
+        "DELETE FROM tasks WHERE id = ?",
+        [req.params.id],
+        (err) => {
+            if (err) throw err;
+
+            res.sendStatus(200);
+        }
+    );
+});
+
+app.get("/test", (req, res) => {
+    res.send("Test route works!");
+});
+
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });

@@ -1,23 +1,39 @@
+<!DOCTYPE html>
 <html>
+
 <head>
     <title>Smart Study Planner</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>Smart Study Planner</h1>
+    <h1>📚 Smart Study Planner</h1>
+
+    <!-- ADD TASK -->
 
     <h2>Add Study Task</h2>
 
     <form action="/addTask" method="POST">
 
-        <input type="text" name="subject" placeholder="Subject" required>
+        <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            required>
 
-        <input type="text" name="task" placeholder="Task Name" required>
+        <input
+            type="text"
+            name="task"
+            placeholder="Task Name"
+            required>
 
-        <input type="date" name="deadline" required>
+        <input
+            type="date"
+            name="deadline"
+            required>
 
         <select name="priority">
             <option>High</option>
@@ -25,19 +41,59 @@
             <option>Low</option>
         </select>
 
-        <button type="submit">Add Task</button>
+        <button type="submit">
+            Add Task
+        </button>
+
     </form>
 
-    <h2>Calendar</h2>
-    <div class="calendar-section">
-        <input type="date">
+    <!-- STATISTICS -->
+
+    <h2>Dashboard Statistics</h2>
+
+    <div class="stats-container">
+
+        <div class="stat-card">
+            <h3>Total Tasks</h3>
+            <p id="totalTasks">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Completed</h3>
+            <p id="completedTasks">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Pending</h3>
+            <p id="pendingTasks">0</p>
+        </div>
+
     </div>
 
-    <input type="date">
+    <!-- TASKS -->
+
+    <h2>My Tasks</h2>
+
+    <div id="taskList">
+
+    </div>
+
+    <!-- CALENDAR -->
+
+    <h2>Calendar</h2>
+
+    <div class="calendar-section">
+
+        <input type="date">
+
+    </div>
+
+    <!-- TIMETABLE -->
 
     <h2>Weekly Timetable</h2>
 
     <table>
+
         <tr>
             <th>Day</th>
             <th>Tasks</th>
@@ -57,6 +113,27 @@
             <td>Wednesday</td>
             <td>Low Priority Tasks</td>
         </tr>
+
+        <tr>
+            <td>Thursday</td>
+            <td>Study Session</td>
+        </tr>
+
+        <tr>
+            <td>Friday</td>
+            <td>Revision</td>
+        </tr>
+
+        <tr>
+            <td>Saturday</td>
+            <td>Assignments</td>
+        </tr>
+
+        <tr>
+            <td>Sunday</td>
+            <td>Weekly Review</td>
+        </tr>
+
     </table>
 
 </div>
@@ -64,4 +141,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
