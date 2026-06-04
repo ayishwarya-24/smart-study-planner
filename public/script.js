@@ -12,11 +12,15 @@ function showNotification() {
 
 setTimeout(showNotification, 5000);
 
+        
 function loadTasks() {
+    console.log("Loading tasks...");
 
     fetch("/tasks")
         .then(response => response.json())
         .then(tasks => {
+
+            console.log(tasks);
 
             const taskList = document.getElementById("taskList");
 
@@ -68,6 +72,7 @@ function loadTasks() {
                 tasks.length - completed;
         });
 }
+
 
 function completeTask(id) {
 

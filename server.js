@@ -88,6 +88,8 @@ app.post("/addTask", (req, res) => {
 //GET TASKS
 app.get("/tasks", (req, res) => {
 
+    console.log("Session userId:", req.session.userId);
+
     const userId = req.session.userId;
 
     db.query(
@@ -100,7 +102,6 @@ app.get("/tasks", (req, res) => {
         }
     );
 });
-
 
 //COMPLETE TASK
 app.post("/completeTask/:id", (req, res) => {
@@ -130,9 +131,7 @@ app.post("/deleteTask/:id", (req, res) => {
     );
 });
 
-app.get("/test", (req, res) => {
-    res.send("Test route works!");
-});
+
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
