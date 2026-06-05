@@ -57,7 +57,7 @@ app.post("/login", (req, res) => {
 
             if (results.length > 0) {
                 req.session.userId = results[0].id;
-
+                console.log("Logged in user:", req.session.userId);
                 res.redirect("/index.html");
             } else {
                 res.send("Invalid Login");
@@ -65,6 +65,7 @@ app.post("/login", (req, res) => {
         }
     );
 });
+
 
 // ADD TASK
 app.post("/addTask", (req, res) => {
@@ -132,6 +133,14 @@ app.post("/deleteTask/:id", (req, res) => {
 });
 
 
+//LOGOUT
+app.get("/logout", (req, res) => {
+
+    req.session.destroy(() => {
+        res.redirect("/login.html");
+    });
+
+});
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");

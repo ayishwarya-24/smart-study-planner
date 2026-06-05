@@ -91,3 +91,35 @@ function deleteTask(id) {
 }
 
 loadTasks();
+
+function searchTasks() {
+
+    const input =
+        document.getElementById("searchTask")
+        .value
+        .toLowerCase();
+
+    const cards =
+        document.getElementsByClassName("task-card");
+
+    for (let card of cards) {
+
+        if (
+            card.innerText
+                .toLowerCase()
+                .includes(input)
+        ) {
+            card.style.display = "";
+        }
+        else {
+            card.style.display = "none";
+        }
+    }
+}
+
+function toggleDarkMode() {
+
+    document.body.classList.toggle(
+        "dark-mode"
+    );
+}

@@ -9,8 +9,23 @@
 <body>
 
 <div class="container">
-
+    
     <h1>📚 Smart Study Planner</h1>
+        <div class="top-buttons">
+
+            <button
+            type="button"
+            onclick="toggleDarkMode()">
+            🌙 Dark Mode
+            </button>
+            
+            <a href="/logout">
+                <button type="button">
+                Logout
+                </button>
+            </a>
+
+        </div>
 
     <!-- ADD TASK -->
 
@@ -73,6 +88,13 @@
     <!-- TASKS -->
 
     <h2>My Tasks</h2>
+
+    <input
+    type="text"
+    id="searchTask"
+    placeholder="🔍 Search tasks..."
+    onkeyup="searchTasks()">
+
 
     <div id="taskList">
 
