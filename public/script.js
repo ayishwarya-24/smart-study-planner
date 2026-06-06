@@ -26,9 +26,28 @@ function loadTasks() {
 
             taskList.innerHTML = "";
 
+            const dueSoon = document.getElementById("dueSoon");
+
+            dueSoon.innerHTML = "";
+
             let completed = 0;
 
             tasks.forEach(task => {
+                const today = new Date();
+                const deadline = new Date(task.deadline);
+                const diffDays = Math.ceil(
+                    (deadline - today) /
+                    (1000 * 60 * 60 * 24));
+
+                if (diffDays >= 0 && diffDays <= 3 && !task.completed) {
+                    dueSoon.innerHTML += `
+                        <div class="due-card">
+                           ⚠ <strong>${task.subject}</strong><br>
+                           ${task.task_name}<br>
+                           ${diffDays} day(s) remaining
+                        </div>
+                    `;
+                }
 
                 if (task.completed) {
                     completed++;
@@ -61,6 +80,14 @@ function loadTasks() {
                     </div>
                 `;
             });
+
+            if (dueSoon.innerHTML === "") {
+                dueSoon.innerHTML = `
+                   <div class="due-card">
+                    🎉 No upcoming deadlines.
+                   </div>
+                `;
+            }
 
             document.getElementById("totalTasks").innerText =
                 tasks.length;
