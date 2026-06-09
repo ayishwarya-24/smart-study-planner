@@ -33,9 +33,67 @@ cd smart-study-planner
 ```
 
 ### 2. Install Dependencies
-
 ```bash
 npm install
+```
+
+### 3. Create the Database
+
+Open MySQL and run:
+
+```sql
+CREATE DATABASE studyplanner;
+```
+
+### 4. Create Required Tables
+
+```sql
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    subject VARCHAR(100),
+    task_name VARCHAR(255),
+    deadline DATE,
+    priority VARCHAR(20),
+    completed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+```
+
+
+### 5. Configure Database Connection
+
+Open `server.js` and update:
+
+```javascript
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "YOUR_USERNAME",
+    password: "YOUR_PASSWORD",
+    database: "studyplanner"
+});
+```
+
+
+### 6. Start the Application
+
+```bash
+npm start
+```
+
+### 7. Open in Browser
+
+Visit:
+
+```
+http://localhost:3000
 ```
 
 
