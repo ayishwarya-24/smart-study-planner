@@ -23,8 +23,20 @@ A full-stack web application that helps students manage study tasks, deadlines, 
 - Express.js
 - MySQL
 
+## Installation 
 
+### 1. Clone the Repository
 
+```bash
+git clone https://github.com/YOUR_USERNAME/smart-study-planner.git
+cd smart-study-planner
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
 
 
   
