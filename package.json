@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ayishwarya-24/smart-study-planner#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "body-parser": "^2.2.2",
     "express": "^5.2.1",
     "express-session": "^1.19.0",

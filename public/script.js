@@ -25,6 +25,19 @@ function loadTasks() {
             const taskList = document.getElementById("taskList");
 
             taskList.innerHTML = "";
+            const days = [      
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+
+            days.forEach(day => {
+                document.getElementById(day).innerHTML = "";
+            });
 
             const dueSoon = document.getElementById("dueSoon");
 
@@ -33,12 +46,22 @@ function loadTasks() {
             let completed = 0;
 
             tasks.forEach(task => {
+                const deadlineDate = new Date(task.deadline);
                 const today = new Date();
-                const deadline = new Date(task.deadline);
-                const diffDays = Math.ceil(
-                    (deadline - today) /
-                    (1000 * 60 * 60 * 24));
+                today.setHours(0, 0, 0, 0);
 
+                if (deadlineDate >= today) {
+
+                    const dayName = days[deadlineDate.getDay()];
+
+                    document.getElementById(dayName).innerHTML +=
+                        `• ${task.task_name}<br>`;
+                }
+
+                const diffDays = Math.ceil(
+                    (deadlineDate - today) /
+                    (1000 * 60 * 60 * 24)
+                );
                 if (diffDays >= 0 && diffDays <= 3 && !task.completed) {
                     dueSoon.innerHTML += `
                         <div class="due-card">
@@ -60,7 +83,7 @@ function loadTasks() {
 
                         <p>${task.task_name}</p>
 
-                        <p>Deadline: ${task.deadline}</p>
+                        <p>Deadline: ${task.deadline.split("T")[0]}</p>
 
                         <p>Priority: ${task.priority}</p>
 

@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-
+const bcrypt = require("bcrypt");
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,40 +31,64 @@ db.connect((err) => {
 });
 
 // REGISTER
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
+
     const { username, password } = req.body;
+
+    const hashedPassword =
+        await bcrypt.hash(password, 10);
 
     db.query(
         "INSERT INTO users (username, password) VALUES (?, ?)",
-        [username, password],
+        [username, hashedPassword],
         (err) => {
+
             if (err) throw err;
 
             res.redirect("/login.html");
         }
     );
+
 });
 
 // LOGIN
 app.post("/login", (req, res) => {
+
     const { username, password } = req.body;
 
     db.query(
-        "SELECT * FROM users WHERE username=? AND password=?",
-        [username, password],
-        (err, results) => {
+        "SELECT * FROM users WHERE username=?",
+        [username],
+        async (err, results) => {
+
             if (err) throw err;
 
-            if (results.length > 0) {
-                req.session.userId = results[0].id;
-                console.log("Logged in user:", req.session.userId);
+            if (results.length === 0) {
+                return res.send("Invalid Login");
+            }
+
+            const match =
+                await bcrypt.compare(
+                    password,
+                    results[0].password
+                );
+
+            if (match) {
+
+                req.session.userId =
+                    results[0].id;
+
                 res.redirect("/index.html");
+
             } else {
+
                 res.send("Invalid Login");
+
             }
         }
     );
 });
+  
 
 
 // ADD TASK
